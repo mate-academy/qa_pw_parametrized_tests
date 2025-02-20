@@ -12,7 +12,7 @@
 - *coffeeHasCorrectCost.spec.js*
 - *coffeeRemovedFromCart.spec.js*
 2. Use as en example:
-- `coffeeAddedToCart.spec.js`
+- `coffeeCupAddedToCart.spec.js`
 2. Re-run all your tests and make sure they pass after the updates. 
 
 

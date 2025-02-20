@@ -54,6 +54,22 @@ export class CartPage {
     this.totalCheckout = page.getByTestId('checkout');
   }
 
+  coffeeListItemLocator(name) {
+    return this.cartListLocator.getByRole('listitem').filter({ hasText: name });
+  }
+
+  coffeeListItemNameCell(name) {
+    return this.coffeeListItemLocator(name).locator('div').nth(0);
+  }
+
+  coffeeListItemUnitCell(name) {
+    return this.coffeeListItemLocator(name).locator('div').nth(1);
+  }
+
+  coffeeListItemTotalCostCell(name) {
+    return this.coffeeListItemLocator(name).locator('div').nth(3);
+  }
+
   async open() {
     await this.page.goto('https://coffee-cart.app/cart');
   }
@@ -98,12 +114,24 @@ export class CartPage {
     await expect(this.espressoItem).toBeHidden();
   }
 
+  async assertCoffeeNameContainsCorrectText(name) {
+    await expect(this.coffeeListItemNameCell(name)).toContainText(name);
+  }
+
   async assertEspressoNameIsContainsCorrectText() {
     await expect(this.espressoName).toContainText('Espresso');
   }
 
+  async assertCoffeeUnitContainsCorrectText(name, text) {
+    await expect(this.coffeeListItemUnitCell(name)).toContainText(text);
+  }
+
   async assertEspressoUnitContainsCorrectText(text) {
     await expect(this.espressoUnit).toContainText(text);
+  }
+
+  async assertCoffeeTotalCostContainsCorrectText(name, text) {
+    await expect(this.coffeeListItemTotalCostCell(name)).toContainText(text);
   }
 
   async assertEspressoTotalCostContainsCorrectText(text) {
