@@ -1,15 +1,15 @@
 import { test } from '../_fixtures/fixtures';
 import { priceFormatStr } from '../../src/common/priceFormatters';
+import { COFFEE_PRICES } from '../../src/constants';
 
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   cartPage,
   menuPage,
-  prices,
 }) => {
-  const espressoPrice = priceFormatStr(prices.espresso);
-  const discMochaPrice = priceFormatStr(prices.discountedMocha);
-  const cappuccinoPrice = priceFormatStr(prices.cappuccino);
-  const americanoPrice = priceFormatStr(prices.americano);
+  const espressoPrice = priceFormatStr(COFFEE_PRICES.espresso);
+  const discMochaPrice = priceFormatStr(COFFEE_PRICES.discountedMocha);
+  const cappuccinoPrice = priceFormatStr(COFFEE_PRICES.cappuccino);
+  const americanoPrice = priceFormatStr(COFFEE_PRICES.americano);
 
   await menuPage.open();
   await menuPage.clickCappucinoCup();
