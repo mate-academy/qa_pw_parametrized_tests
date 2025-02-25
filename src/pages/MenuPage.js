@@ -28,7 +28,7 @@ export class MenuPage {
   }
 
   async open() {
-    await this.page.goto('https://coffee-cart.app/');
+    await this.page.goto('/');
   }
 
   async clickCoffeeCup(coffeeName) {

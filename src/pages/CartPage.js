@@ -71,11 +71,11 @@ export class CartPage {
   }
 
   async open() {
-    await this.page.goto('https://coffee-cart.app/cart');
+    await this.page.goto('/cart');
   }
 
   async waitForLoading() {
-    await this.page.waitForURL('https://coffee-cart.app/cart');
+    await this.page.waitForURL('/cart');
   }
 
   async reload() {
