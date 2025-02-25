@@ -6,13 +6,15 @@
 3. Run the installation commands `npm ci` & `npx playwright install`.
 
 ## Main task:
-1. Parametrize test cases for CoffeeCart to test different coffees
+1. Parametrize test cases for CoffeeCart to test different coffees:
 - *coffeeAddedToCart.spec.js*
 - *coffeeAddedToTotal.spec.js*
 - *coffeeHasCorrectCost.spec.js*
 - *coffeeRemovedFromCart.spec.js*
-2. Use as en example:
-- `coffeeCupAddedToCart.spec.js`
+2. Create new methods to be working for any type of coffee (without hardcoded names) in the Page classes.
+3. Use as en example:
+- `coffeeCupAddedToCart.spec.js` 
+4. Remove old redundant methods (with hardcoded names) from the Page classes. 
 2. Re-run all your tests and make sure they pass after the updates. 
 
 
