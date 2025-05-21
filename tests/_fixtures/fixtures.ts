@@ -2,10 +2,12 @@ import { test as base } from '@playwright/test';
 import { MenuPage } from '../../src/pages/MenuPage';
 import { CartPage } from '../../src/pages/CartPage';
 
-export const test = base.extend<{
-  cartPage;
-  menuPage;
-}>({
+type fixtures = {
+  cartPage: CartPage;
+  menuPage: MenuPage;
+};
+
+export const test = base.extend<fixtures>({
   cartPage: async ({ page }, use) => {
     const cartPage = new CartPage(page);
 
