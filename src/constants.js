@@ -3,6 +3,7 @@ export const COFFEE_NAMES = {
   espressoMacchiato: 'Espresso Macchiato',
   cappuccino: 'Cappuccino',
   mocha: 'Mocha',
+  discountedMocha: '(Discounted) Mocha',
   flatWhite: 'Flat White',
   americano: 'Americano',
   cafeLatte: 'Cafe Latte',
