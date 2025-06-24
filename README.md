@@ -12,7 +12,7 @@
 ## Task
 
 1. Parametrize test cases for CoffeeCart to test different coffees:
-   
+
     - `coffeeAddedToCart.spec.js`
     - `coffeeAddedToTotal.spec.js`
     - `coffeeHasCorrectCost.spec.js`
