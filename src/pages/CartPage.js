@@ -56,7 +56,7 @@ export class CartPage {
 
   coffeeRemoveButtonLocator(coffeeName) {
     return this.page.getByRole(
-      'Button', {name: `Remove all ${coffeeName}`}
+      'button', {name: `Remove all ${coffeeName}`}
     );
   }
 
