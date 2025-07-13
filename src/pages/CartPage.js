@@ -54,6 +54,16 @@ export class CartPage {
     this.totalCheckout = page.getByTestId('checkout');
   }
 
+  coffeeRemoveButtonLocator(coffeeName) {
+    return this.page.getByRole(
+      'Button', {name: `Remove all ${coffeeName}`}
+    );
+  }
+
+  async clickRemoveCoffeeButton(coffeeName) {
+    await this.coffeeRemoveButtonLocator(coffeeName).click();
+  }
+
   coffeeListItemLocator(name) {
     return this.cartListLocator.getByRole('listitem').filter({ hasText: name });
   }
@@ -82,96 +92,16 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
-  }
-
-  async clickRemoveAllCappucinoButton() {
-    await this.removeAllCappuccinoButton.click();
-  }
-
-  async clickRemoveOneEspressoButton() {
-    await this.removeOneEspressoButton.click();
-  }
-
-  async clickRemoveOneCappuccinoButton() {
-    await this.removeOneCappuccinoButton.click();
-  }
-
-  async clickAddOneEspressoButton() {
-    await this.addOneEspressoButton.click();
-  }
-
-  async clickAddOneCappuccinoButton() {
-    await this.addOneCappuccinoButton.click();
-  }
-
-  async assertEspressoItemIsVisible() {
-    await expect(this.espressoItem).toBeVisible();
-  }
-
-  async assertEspressoItemIsHidden() {
-    await expect(this.espressoItem).toBeHidden();
-  }
-
   async assertCoffeeNameContainsCorrectText(name) {
     await expect(this.coffeeListItemNameCell(name)).toContainText(name);
   }
-
-  async assertEspressoNameIsContainsCorrectText() {
-    await expect(this.espressoName).toContainText('Espresso');
-  }
-
+ 
   async assertCoffeeUnitContainsCorrectText(name, text) {
     await expect(this.coffeeListItemUnitCell(name)).toContainText(text);
   }
 
-  async assertEspressoUnitContainsCorrectText(text) {
-    await expect(this.espressoUnit).toContainText(text);
-  }
-
   async assertCoffeeTotalCostContainsCorrectText(name, text) {
     await expect(this.coffeeListItemTotalCostCell(name)).toContainText(text);
-  }
-
-  async assertEspressoTotalCostContainsCorrectText(text) {
-    await expect(this.espressoTotalCost).toContainText(text);
-  }
-
-  async assertCappuccinoItemIsVisible() {
-    await expect(this.cappuccinoItem).toBeVisible();
-  }
-
-  async assertCappuccinoItemIsHidden() {
-    await expect(this.cappuccinoItem).toBeHidden();
-  }
-
-  async assertCappuccinoNameIsContainsCorrectText() {
-    await expect(this.cappuccinoName).toContainText('Cappuccino');
-  }
-
-  async assertCappuccinoUnitContainsCorrectText(text) {
-    await expect(this.cappuccinoUnit).toContainText(text);
-  }
-
-  async assertCappuccinoTotalCostContainsCorrectText(text) {
-    await expect(this.cappuccinoTotalCost).toContainText(text);
-  }
-
-  async assertDiscountedMochaItemIsHidden() {
-    await expect(this.discountedMochaItem).toBeHidden();
-  }
-
-  async assertDiscountedMochaTotalCostContainsCorrectText(text) {
-    await expect(this.discountedMochaTotalCost).toContainText(text);
-  }
-
-  async assertAmericanoItemIsVisible() {
-    await expect(this.americanoItem).toBeVisible();
-  }
-
-  async assertAmericanoTotalCostContainsCorrectText(text) {
-    await expect(this.americanoTotalCost).toContainText(text);
   }
 
   async assertNoCoffeeMessageIsVisible() {

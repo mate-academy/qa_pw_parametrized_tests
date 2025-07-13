@@ -21,30 +21,23 @@ export class MenuPage {
     this.noPromoButton = page.getByRole('button', { name: "Nah, I'll skip." });
   }
 
+  cupCostLocator(coffeeName) {
+    return this.page.locator(
+      `//h4[normalize-space(text()) = '${coffeeName}']/small`
+    );
+  }
+
   coffeeCupLocator(coffeeName) {
     const testId = coffeeName.replace(' ', '_');
-
     return this.page.getByTestId(testId);
+  }
+
+  async addCoffeeCupToCart(coffeeName) {
+    await this.coffeeCupLocator(coffeeName).click();
   }
 
   async open() {
     await this.page.goto('/');
-  }
-
-  async clickCoffeeCup(coffeeName) {
-    await this.coffeeCupLocator(coffeeName).click();
-  }
-
-  async clickCappucinoCup() {
-    await this.cappuccinoCup.click();
-  }
-
-  async clickEspressoCup() {
-    await this.espressoCup.click();
-  }
-
-  async clickAmericanoCup() {
-    await this.americanoCup.click();
   }
 
   async clickCartLink() {
@@ -63,12 +56,8 @@ export class MenuPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 
-  async assertCappuccinoCupCostHasValue(value) {
-    await expect(this.cappuccinoCupCost).toContainText(value);
-  }
-
-  async assertEspressoCupCostHasValue(value) {
-    await expect(this.espressoCupCost).toContainText(value);
+  async assertCoffeeCupCostHasValue(coffeeName, coffeePrice) {
+    await expect(this.cupCostLocator(coffeeName)).toContainText(coffeePrice);
   }
 
   async assertPromoMessageIsVisible() {
