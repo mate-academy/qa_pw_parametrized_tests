@@ -15,10 +15,16 @@ export const COFFEE_PRICES = {
   espressoMacchiato: 12,
   cappuccino: 19,
   mocha: 8,
-  discountedMocha: 4,
   flatWhite: 18,
   americano: 7,
   cafeLatte: 16,
   espressoConPanna: 14,
   cafeBreve: 15,
+};
+
+export const COFFEE_DISCOUNT = {
+  discountedMocha: {
+    coffee: '(Discounted) Mocha',
+    price: 4,
+  },
 };

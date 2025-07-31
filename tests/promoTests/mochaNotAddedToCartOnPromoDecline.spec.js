@@ -1,23 +1,61 @@
 import { test } from '../_fixtures/fixtures';
+import {
+  unitPriceFormatStr,
+  priceFormatStr,
+  totalPriceFormatStr,
+} from '../../src/common/priceFormatters';
+import {
+  COFFEE_NAMES,
+  COFFEE_PRICES,
+  COFFEE_DISCOUNT,
+} from '../../src/constants';
 
-test('Assert discounted Mocha added to the Cart after promo accepting', async ({
+const selectedCoffees = ['espresso', 'cappuccino', 'americano'];
+const coffeeSet = [];
+
+for (const [key, value] of Object.entries(COFFEE_NAMES)) {
+  if (selectedCoffees.includes(value.toLowerCase())) {
+    coffeeSet.push({ coffee: value, price: COFFEE_PRICES[key] });
+  }
+}
+
+test('Assert discounted Mocha is missed after promo declining', async ({
   cartPage,
   menuPage,
 }) => {
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
-  await menuPage.clickAmericanoCup();
+  await test.step('Add 3 coffee to order', async () => {
+    for (const { coffee } of coffeeSet) {
+      await menuPage.clickCoffeeCup(coffee);
+    }
+  });
 
   await menuPage.assertPromoMessageIsVisible();
+
   await menuPage.clickNoPromoButton();
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
-  await cartPage.assertDiscountedMochaItemIsHidden();
+  await test.step('Check prices for each and total', async () => {
+    let expectedTotal = 0;
 
-  await cartPage.assertCappuccinoItemIsVisible();
-  await cartPage.assertAmericanoItemIsVisible();
+    for (const { coffee, price } of coffeeSet) {
+      const totalPriceStr = priceFormatStr(price);
+      const unitPriceStr = unitPriceFormatStr(price, 1);
+      expectedTotal += price;
+
+      await cartPage.assertCoffeeNameContainsCorrectText(coffee);
+      await cartPage.assertCoffeeUnitContainsCorrectText(coffee, unitPriceStr);
+      await cartPage.assertCoffeeTotalCostContainsCorrectText(
+        coffee,
+        totalPriceStr,
+      );
+    }
+    await cartPage.assertCoffeeIsNotVisible(
+      COFFEE_DISCOUNT.discountedMocha.coffee,
+    );
+    const expectedTotalStr = totalPriceFormatStr(expectedTotal);
+    await menuPage.assertTotalCheckoutContainsValue(expectedTotalStr);
+  });
 });

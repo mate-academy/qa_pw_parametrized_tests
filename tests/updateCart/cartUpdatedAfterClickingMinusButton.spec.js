@@ -1,25 +1,24 @@
 import { test } from '../_fixtures/fixtures';
+import { COFFEE_NAMES, COFFEE_PRICES } from '../../src/constants';
 
-test('Assert cart updated correctly after clicking minus for drinks', async ({
-  cartPage,
-  menuPage,
-}) => {
-  await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+let testParameters = [];
 
-  await menuPage.clickCartLink();
-  await cartPage.waitForLoading();
+for (const [key, value] of Object.entries(COFFEE_NAMES)) {
+  testParameters.push({ coffee: value, price: COFFEE_PRICES[key] });
+}
 
-  await cartPage.assertEspressoItemIsVisible();
+testParameters.forEach(({ coffee }) => {
+  test(`Cart updated correctly after clicking minus ${coffee} button`, async ({
+    menuPage,
+    cartPage,
+  }) => {
+    await menuPage.open();
+    await menuPage.clickCoffeeCup(coffee);
 
-  await cartPage.clickRemoveOneEspressoButton();
+    await menuPage.clickCartLink();
+    await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsHidden();
-  await cartPage.assertCappuccinoItemIsVisible();
-
-  await cartPage.clickRemoveOneCappuccinoButton();
-
-  await cartPage.assertCappuccinoItemIsHidden();
-  await cartPage.assertNoCoffeeMessageIsVisible();
+    await cartPage.clickRemoveOneCoffeeButton(coffee);
+    await cartPage.assertNoCoffeeMessageIsVisible();
+  });
 });
