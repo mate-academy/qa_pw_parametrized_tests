@@ -32,10 +32,7 @@ export class CartPage {
       .getByRole('listitem')
       .filter({ hasText: 'Americano' });
     this.americanoTotalCost = this.americanoItem.locator('div').nth(3);
-
-    this.removeAllEspressoButton = page.getByLabel('Remove all Espresso');
-    this.removeAllCappuccinoButton = page.getByLabel('Remove all Cappuccino');
-
+    
     this.removeOneEspressoButton = page.getByRole('button', {
       name: 'Remove one Espresso',
     });
@@ -82,12 +79,8 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
-  }
-
-  async clickRemoveAllCappucinoButton() {
-    await this.removeAllCappuccinoButton.click();
+  async clickRemoveAllCoffeeButton(coffee) {
+    await this.page.getByLabel(`Remove all ${coffee}`).click();
   }
 
   async clickRemoveOneEspressoButton() {
