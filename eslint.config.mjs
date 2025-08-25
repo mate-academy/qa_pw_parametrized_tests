@@ -28,6 +28,7 @@ export default [
       '**/node_modules/*',
       'playwright.config.js',
       '**/playwright-report/**',
+      '**/test-results/**',
     ],
   },
 ];
