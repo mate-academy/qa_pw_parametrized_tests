@@ -1,20 +1,18 @@
 import { test } from '../_fixtures/fixtures';
 
-test('Assert cart cleaned after page refresh', async ({
-  cartPage,
-  menuPage,
-}) => {
+test('Assert cart cleaned after page refresh'
+  , async ({ cartPage, menuPage }) => {
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup('Cappuccino');
+  await menuPage.clickCoffeeCup('Espresso');
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertCappuccinoItemIsVisible();
+  await cartPage.assertItemIsVisible('Cappuccino');
 
   await cartPage.reload();
 
-  await cartPage.assertCappuccinoItemIsHidden();
+  await cartPage.assertItemIsHidden('Cappuccino');
   await cartPage.assertNoCoffeeMessageIsVisible();
 });

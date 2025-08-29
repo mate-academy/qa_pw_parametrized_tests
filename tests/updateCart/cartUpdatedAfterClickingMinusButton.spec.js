@@ -1,25 +1,23 @@
 import { test } from '../_fixtures/fixtures';
 
-test('Assert cart updated correctly after clicking minus for drinks', async ({
-  cartPage,
-  menuPage,
-}) => {
+test('Assert cart updated correctly after clicking minus for drinks'
+  , async ({ cartPage, menuPage }) => {
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup('Cappuccino');
+  await menuPage.clickCoffeeCup('Espresso');
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
+  await cartPage.assertItemIsVisible('Espresso');
 
-  await cartPage.clickRemoveOneEspressoButton();
+  await cartPage.clickRemoveOne('Espresso');
 
-  await cartPage.assertEspressoItemIsHidden();
-  await cartPage.assertCappuccinoItemIsVisible();
+  await cartPage.assertItemIsHidden('Espresso');
+  await cartPage.assertItemIsVisible('Cappuccino');
 
-  await cartPage.clickRemoveOneCappuccinoButton();
+  await cartPage.clickRemoveOne('Cappuccino');
 
-  await cartPage.assertCappuccinoItemIsHidden();
+  await cartPage.assertItemIsHidden('Cappuccino');
   await cartPage.assertNoCoffeeMessageIsVisible();
 });
