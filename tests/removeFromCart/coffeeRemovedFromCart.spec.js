@@ -15,6 +15,7 @@ testParameters.forEach(coffee => {
     await cartPage.waitForLoading();
 
     await cartPage.clickRemoveAllCoffeeButton(coffee);
+    await cartPage.assertCoffeeItemIsHidden(coffee);
     await cartPage.assertNoCoffeeMessageIsVisible();
   });
 });
