@@ -3,28 +3,30 @@ const { expect } = require('@playwright/test');
 export class MenuPage {
   constructor(page) {
     this.page = page;
-    this.cappuccinoCup = page.getByTestId('Cappuccino');
-    this.cappuccinoCupCost = page
-      .getByRole('listitem')
-      .filter({ has: this.cappuccinoCup });
-    this.espressoCup = page.getByTestId('Espresso');
-    this.espressoCupCost = page
-      .getByRole('listitem')
-      .filter({ has: this.espressoCup });
-    this.americanoCup = page.getByTestId('Americano');
     this.cartLink = page.getByLabel('Cart page');
     this.totalCheckout = page.getByTestId('checkout');
     this.promoMessage = page.getByText(
-      "It's your lucky day! Get an extra cup of Mocha for $4.",
+      "It's your lucky day! Get an extra cup of Mocha for $4."
     );
     this.yesPromoButton = page.getByRole('button', { name: 'Yes, of course!' });
     this.noPromoButton = page.getByRole('button', { name: "Nah, I'll skip." });
   }
 
+  /**
+   * Locator for a coffee cup button by its name
+   */
   coffeeCupLocator(coffeeName) {
-    const testId = coffeeName.replace(' ', '_');
-
+    const testId = coffeeName.replace(/ /g, '_');
     return this.page.getByTestId(testId);
+  }
+
+  /**
+   * Locator for a coffee cost cell by its name
+   */
+  coffeeCupCostLocator(coffeeName) {
+    return this.page
+      .getByRole('listitem')
+      .filter({ has: this.coffeeCupLocator(coffeeName) });
   }
 
   async open() {
@@ -33,18 +35,6 @@ export class MenuPage {
 
   async clickCoffeeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
-  }
-
-  async clickCappucinoCup() {
-    await this.cappuccinoCup.click();
-  }
-
-  async clickEspressoCup() {
-    await this.espressoCup.click();
-  }
-
-  async clickAmericanoCup() {
-    await this.americanoCup.click();
   }
 
   async clickCartLink() {
@@ -63,12 +53,9 @@ export class MenuPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 
-  async assertCappuccinoCupCostHasValue(value) {
-    await expect(this.cappuccinoCupCost).toContainText(value);
-  }
-
-  async assertEspressoCupCostHasValue(value) {
-    await expect(this.espressoCupCost).toContainText(value);
+  async assertCoffeeCupCostHasValue(coffeeName, expectedValue) {
+    const locator = this.coffeeCupCostLocator(coffeeName);
+    await expect(locator).toContainText(expectedValue);
   }
 
   async assertPromoMessageIsVisible() {
