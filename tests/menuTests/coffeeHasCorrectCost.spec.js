@@ -15,7 +15,7 @@ testParameters.forEach(({ coffee, price }) => {
 
     await menuPage.open();
 
-    // Uniwersalna metoda zamiast assertCappuccinoCupCostHasValue / assertEspressoCupCostHasValue
-    await menuPage.assertCoffeeUnitContainsCorrectText(coffee, priceStr);
+    // Używamy poprawnej metody z MenuPage do sprawdzenia ceny kawy
+    await menuPage.assertCoffeeCostHasValue(coffee, priceStr);
   });
 });
