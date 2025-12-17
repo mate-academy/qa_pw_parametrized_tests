@@ -16,6 +16,6 @@ testParameters.forEach(({ coffee, price }) => {
     await menuPage.open();
 
     // Używamy poprawnej metody z MenuPage do sprawdzenia ceny kawy
-    await menuPage.assertCoffeeCostHasValue(coffee, priceStr);
+    await menuPage.assertCoffeeCupCostHasValue(coffee, priceStr);
   });
 });
