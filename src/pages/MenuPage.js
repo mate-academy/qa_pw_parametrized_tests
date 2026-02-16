@@ -1,11 +1,12 @@
-const { expect } = require('@playwright/test');
+import { expect } from '@playwright/test';
 
 export class MenuPage {
   constructor(page) {
     this.page = page;
-   
+
     this.cartLink = page.getByLabel('Cart page');
     this.totalCheckout = page.getByTestId('checkout');
+
     this.promoMessage = page.getByText(
       "It's your lucky day! Get an extra cup of Mocha for $4.",
     );
@@ -13,28 +14,27 @@ export class MenuPage {
     this.noPromoButton = page.getByRole('button', { name: "Nah, I'll skip." });
   }
 
-  
-
-  
-
-  async assertCoffeePriceHasValue(coffeeName, price) {
-    await expect(this.coffeHeadLocator(coffeeName)).toContainText(price);
+  coffeeTestId(coffeeName) {
+    return coffeeName.trim().replace(/\s+/g, '_');
   }
 
   coffeeCupLocator(coffeeName) {
-    const testId = coffeeName.replace(' ', '_');
-
-    return this.page.getByTestId(testId);
+    return this.page.getByTestId(this.coffeeTestId(coffeeName));
   }
 
-  coffeHeadLocator(coffeeName) {
+  coffeeItemLocator(coffeeName) {
     return this.page
       .getByRole('listitem')
       .filter({ has: this.coffeeCupLocator(coffeeName) });
   }
 
-  async assertCoffeHeadLocatorCostHasValue(coffeeName, price) {
-    await expect(this.coffeHeadLocator(coffeeName)).toContainText(price);
+  coffeePriceLocator(coffeeName) {
+    return this.coffeeItemLocator(coffeeName).locator('h4 small');
+  }
+
+  async assertCoffeePriceHasValue(coffeeName, price) {
+    const expected = price.startsWith('$') ? price : `$${price}`;
+    await expect(this.coffeePriceLocator(coffeeName)).toHaveText(expected);
   }
 
   async open() {
@@ -44,8 +44,6 @@ export class MenuPage {
   async clickCoffeeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
   }
-
- 
 
   async clickCartLink() {
     await this.cartLink.click();
@@ -62,8 +60,6 @@ export class MenuPage {
   async assertTotalCheckoutContainsValue(value) {
     await expect(this.totalCheckout).toContainText(value);
   }
-
-  
 
   async assertPromoMessageIsVisible() {
     await expect(this.promoMessage).toBeVisible();
