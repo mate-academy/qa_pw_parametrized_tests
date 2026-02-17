@@ -4,10 +4,14 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   cartPage,
   menuPage,
 }) => {
+  const espresso = 'Espresso';
+  const cappuccino = 'Cappuccino';
+  const americano = 'Americano';
+
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
-  await menuPage.clickAmericanoCup();
+  await menuPage.clickCoffeeCup(cappuccino);
+  await menuPage.clickCoffeeCup(espresso);
+  await menuPage.clickCoffeeCup(americano);
 
   await menuPage.assertPromoMessageIsVisible();
   await menuPage.clickNoPromoButton();
@@ -15,9 +19,9 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
+  await cartPage.assertCoffeeItemIsVisible(espresso);
   await cartPage.assertDiscountedMochaItemIsHidden();
 
-  await cartPage.assertCappuccinoItemIsVisible();
-  await cartPage.assertAmericanoItemIsVisible();
+  await cartPage.assertCoffeeItemIsVisible(cappuccino);
+  await cartPage.assertCoffeeItemIsVisible(americano);
 });

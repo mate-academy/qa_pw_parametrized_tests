@@ -4,17 +4,20 @@ test('Assert cart cleaned after page refresh', async ({
   cartPage,
   menuPage,
 }) => {
+  const espresso = 'Espresso';
+  const cappuccino = 'Cappuccino';
+
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup(cappuccino);
+  await menuPage.clickCoffeeCup(espresso);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertCappuccinoItemIsVisible();
+  await cartPage.assertCoffeeItemIsVisible(cappuccino);
 
   await cartPage.reload();
 
-  await cartPage.assertCappuccinoItemIsHidden();
+  await cartPage.assertCoffeeItemIsHidden(espresso);
   await cartPage.assertNoCoffeeMessageIsVisible();
 });
