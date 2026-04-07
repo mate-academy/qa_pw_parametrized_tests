@@ -11,7 +11,7 @@
 
 ## Task
 
-1. Convert tests within `tests/menuTests` folder `cappuccinoAddedToTotal.spec.js` and `espressoAddedToTotal.spec.js` into parametrized test `coffeeAddedToTotal.spec.js` for all coffee types. 
+1. Convert tests within `tests/menuTests` folder `cappuccinoAddedToTotal.spec.js` and `espressoAddedToTotal.spec.js` into parametrized test `coffeeAddedToTotal.spec.js` for all coffee types.  
 2. Convert tests within `tests/menuTests` folder `cappuccinoHasCorrectCost.spec.js` and `espressoHasCorrectCost.spec.js` into parametrized test `coffeeHasCorrectCost.spec.js`  for all coffee types. 
 3. Convert tests within `tests/removeFromCart` folder `cappuccinoRemovedFromCart.spec.js` and `espressoRemovedFromCart.spec.js` into parametrized test `coffeeRemovedFromCart.spec.js`  for all coffee types. 
     - `coffeeAddedToCart.spec.js`
