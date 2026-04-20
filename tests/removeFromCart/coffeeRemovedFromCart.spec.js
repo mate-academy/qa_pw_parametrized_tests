@@ -1,13 +1,11 @@
 import { test } from '../_fixtures/fixtures';
+import { COFFEE_NAMES } from '../../src/constants';
 
-const testParameters = [
-  {
-    label: 'Cappuccino',
-  },
-  {
-    label: 'Espresso',
-  },
-];
+let testParameters = [];
+
+for (const [, value] of Object.entries(COFFEE_NAMES)) {
+  testParameters.push({ label: value });
+}
 
 testParameters.forEach(({label}) =>{
   test.describe('Check coffee removed from cart', () => {
@@ -16,12 +14,12 @@ testParameters.forEach(({label}) =>{
       menuPage,
     }) => {
       await menuPage.open();
-      await menuPage.clickCoffeeCup('Cappuccino');
+      await menuPage.clickCoffeeCup(label);
 
       await menuPage.clickCartLink();
       await cartPage.waitForLoading();
 
-      await cartPage.clickRemoveAllCoffeeItemButton('Cappuccino');
+      await cartPage.clickRemoveAllCoffeeItemButton(label);
       await cartPage.assertNoCoffeeMessageIsVisible();
     });
   });
