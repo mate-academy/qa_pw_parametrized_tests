@@ -27,9 +27,6 @@ testParameters.forEach(({ coffee, price }) => {
 
     await cartPage.assertCoffeeNameContainsCorrectText(coffee);
     await cartPage.assertCoffeeUnitContainsCorrectText(coffee, unitPriceStr);
-    await cartPage.assertCoffeeTotalCostContainsCorrectText(
-      coffee,
-      totalPriceStr,
-    );
+    await cartPage.assertCoffeeTotalCostContainsCorrectText(coffee, totalPriceStr);
   });
 });
