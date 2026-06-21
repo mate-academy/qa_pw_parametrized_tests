@@ -1,20 +1,28 @@
 import { test } from '../_fixtures/fixtures';
 
-test('Assert cart cleaned after page refresh', async ({
-  cartPage,
-  menuPage,
-}) => {
+import { COFFEE_NAMES, COFFEE_PRICES } from '../../src/constants';
+
+let testParameters = [];
+
+for (const [key, value] of Object.entries(COFFEE_NAMES)) {
+  testParameters.push({ coffee: value, price: COFFEE_PRICES[key] });
+}
+
+testParameters.forEach(({ coffee }) => {
+  test(`Assert cart with ${coffee} is cleaned after page refresh`, async ({
+    menuPage,
+    cartPage,
+  }) => {
+  
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup(coffee);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertCappuccinoItemIsVisible();
+  await cartPage.assertCoffeeItemIsVisible(coffee);
 
   await cartPage.reload();
-
-  await cartPage.assertCappuccinoItemIsHidden();
   await cartPage.assertNoCoffeeMessageIsVisible();
+});
 });
