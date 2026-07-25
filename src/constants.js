@@ -22,3 +22,8 @@ export const COFFEE_PRICES = {
   espressoConPanna: 14,
   cafeBreve: 15,
 };
+
+export const COFFEE_MENU = Object.keys(COFFEE_NAMES).map(key => ({
+  name: COFFEE_NAMES[key],
+  price: COFFEE_PRICES[key],
+}));
