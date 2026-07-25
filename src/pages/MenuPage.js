@@ -4,13 +4,7 @@ export class MenuPage {
   constructor(page) {
     this.page = page;
     this.cappuccinoCup = page.getByTestId('Cappuccino');
-    this.cappuccinoCupCost = page
-      .getByRole('listitem')
-      .filter({ has: this.cappuccinoCup });
     this.espressoCup = page.getByTestId('Espresso');
-    this.espressoCupCost = page
-      .getByRole('listitem')
-      .filter({ has: this.espressoCup });
     this.americanoCup = page.getByTestId('Americano');
     this.cartLink = page.getByLabel('Cart page');
     this.totalCheckout = page.getByTestId('checkout');
@@ -25,6 +19,12 @@ export class MenuPage {
     const testId = coffeeName.replace(' ', '_');
 
     return this.page.getByTestId(testId);
+  }
+
+  coffeePriceLocator(coffeeName) {
+    const coffeeCup = this.coffeeCupLocator(coffeeName);
+
+    return this.page.getByRole('listitem').filter({ has: coffeeCup });
   }
 
   async open() {
@@ -63,12 +63,8 @@ export class MenuPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 
-  async assertCappuccinoCupCostHasValue(value) {
-    await expect(this.cappuccinoCupCost).toContainText(value);
-  }
-
-  async assertEspressoCupCostHasValue(value) {
-    await expect(this.espressoCupCost).toContainText(value);
+  async assertCoffeCupCostHasValue(coffeName, value) {
+    await expect(this.coffeePriceLocator(coffeName)).toContainText(value);
   }
 
   async assertPromoMessageIsVisible() {
