@@ -31,7 +31,7 @@ export class MenuPage {
     await this.page.goto('/');
   }
 
-  async clickCoffeeCup(coffeeName) {
+  async clickCoffeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
   }
 

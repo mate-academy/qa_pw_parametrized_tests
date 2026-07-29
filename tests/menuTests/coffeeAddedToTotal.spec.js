@@ -9,14 +9,14 @@ for (const [key, value] of Object.entries(COFFEE_NAMES)) {
   testParameters.push({ coffee: value, price: COFFEE_PRICES[key] });
 }
 
-testParameters.forEach(({coffe, price}) => {
-  test (`Check the ${coffe} cost is added to Total on menu page `, async ({
+testParameters.forEach(({coffee, price}) => {
+  test (`Check the ${coffee} cost is added to Total on menu page `, async ({
     menuPage
   }) => {
         const totalPriceStr = totalPriceFormatStr(price);
 
         await menuPage.open();
-        await menuPage.clickCoffeeCup(coffe);
+        await menuPage.clickCoffeCup(coffee);
         await menuPage.assertTotalCheckoutContainsValue(totalPriceStr);
   });
 });

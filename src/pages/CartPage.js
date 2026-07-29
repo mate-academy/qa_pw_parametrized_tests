@@ -97,7 +97,7 @@ export class CartPage {
       return this.page.getByRole('button', {name : `Remove one ${coffeName}`});
     }
 
-    async removeOneCoffeButtonLocatorClick (coffeName) {
+    async removeOneCoffeeButtonClick (coffeName) {
       await this.removeOneCoffeButtonLocator(coffeName).click();
     }
 
@@ -105,7 +105,7 @@ export class CartPage {
       return this.page.getByRole('button', {name : `Remove all ${coffeName}`});
     }
 
-    async removeAllCoffeButtonLocatorClick (coffeName) {
+    async clickRemoveAllCoffeeButton (coffeName) {
       await this.removeAllCoffeButtonLocator(coffeName).click();
     }
 
