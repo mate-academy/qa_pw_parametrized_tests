@@ -16,7 +16,7 @@ testParameters.forEach(({coffee, price}) => {
         const totalPriceStr = totalPriceFormatStr(price);
 
         await menuPage.open();
-        await menuPage.clickCoffeCup(coffee);
+        await menuPage.clickCoffeeCup(coffee);
         await menuPage.assertTotalCheckoutContainsValue(totalPriceStr);
   });
 });

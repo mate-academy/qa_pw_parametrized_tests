@@ -20,7 +20,7 @@ testParameters.forEach(({ coffee, price }) => {
     const unitPriceStr = unitPriceFormatStr(price, 1);
 
     await menuPage.open();
-    await menuPage.clickCoffeCup(coffee);
+    await menuPage.clickCoffeeCup(coffee);
 
     await menuPage.clickCartLink();
     await cartPage.waitForLoading();

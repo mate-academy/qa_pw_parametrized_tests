@@ -9,7 +9,7 @@ test('Assert cart updated correctly after clicking minus for drinks', async ({
   // await menuPage.clickCappucinoCup();
   // await menuPage.clickEspressoCup();
   
-  await menuPage.clickCoffeCup(COFFEE_NAMES.espresso);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.espresso);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();

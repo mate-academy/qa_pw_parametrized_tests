@@ -89,8 +89,8 @@ export class CartPage {
       return this.page.getByRole('button', {name : `Add one ${coffeName}`});
     }
 
-    async addOneCoffeButtonLocatorClick (coffeName) {
-      await this.addOneCoffeButtonLocator(coffeName).click();
+    async addOneCoffeeButtonClick(coffeName) {
+      await (await this.addOneCoffeButtonLocator(coffeName)).click();
     }
 
     async removeOneCoffeButtonLocator (coffeName) {
@@ -98,7 +98,7 @@ export class CartPage {
     }
 
     async removeOneCoffeeButtonClick (coffeName) {
-      await this.removeOneCoffeButtonLocator(coffeName).click();
+      await (await this.removeOneCoffeButtonLocator(coffeName)).click();
     }
 
     async removeAllCoffeButtonLocator (coffeName) {
@@ -106,7 +106,7 @@ export class CartPage {
     }
 
     async clickRemoveAllCoffeeButton (coffeName) {
-      await this.removeAllCoffeButtonLocator(coffeName).click();
+      await (await this.removeAllCoffeButtonLocator(coffeName)).click();
     }
 
   // async clickRemoveAllEspressoButton() {
@@ -201,11 +201,11 @@ export class CartPage {
   //   await expect(this.americanoTotalCost).toContainText(text);
   // }
 
-  async assertCoffeIsVisiable (name) {
+  async assertCoffeeIsVisible(name) {
     await expect(this.coffeeListItemNameCell(name)).toBeVisible();
   }
 
-  async assertCoffeIsHidden (name) {
+  async assertCoffeeIsHidden (name) {
     await expect(this.coffeeListItemNameCell(name)).toBeHidden();
   }
 

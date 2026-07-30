@@ -31,7 +31,7 @@ export class MenuPage {
     await this.page.goto('/');
   }
 
-  async clickCoffeCup(coffeeName) {
+  async clickCoffeeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
   }
 
@@ -52,8 +52,10 @@ export class MenuPage {
     .filter({has : this.coffeeCupLocator(coffeeName)});
   }
 
-  async assertCoffeeCupCostHasValue (coffeName, price) {
-    await expect(this.coffeeCupLocator(coffeName)).toContainText(price);
+  async assertCoffeeCupCostHasValue (coffeeName, price) {
+    const priceLocator = await this.coffeCupPriceLocator(coffeeName);
+    await expect(priceLocator).toContainText(price);
+    //await expect(this.coffeCupPriceLocator(coffeeName)).toContainText(price);
   }
 
   async clickCartLink() {

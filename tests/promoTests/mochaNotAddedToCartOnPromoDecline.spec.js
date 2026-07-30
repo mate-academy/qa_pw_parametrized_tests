@@ -9,9 +9,9 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   // await menuPage.clickCappucinoCup();
   // await menuPage.clickEspressoCup();
   // await menuPage.clickAmericanoCup();
-  await menuPage.clickCoffeCup(COFFEE_NAMES.cappuccino);
-  await menuPage.clickCoffeCup(COFFEE_NAMES.espresso);
-  await menuPage.clickCoffeCup(COFFEE_NAMES.americano);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.cappuccino);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.espresso);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.americano);
 
   await menuPage.assertPromoMessageIsVisible();
   await menuPage.clickNoPromoButton();

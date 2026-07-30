@@ -8,8 +8,8 @@ test('Assert cart cleaned after page refresh', async ({
   await menuPage.open();
   // await menuPage.clickCappucinoCup();
   // await menuPage.clickEspressoCup();
-  await menuPage.clickCoffeCup(COFFEE_NAMES.cappuccino);
-  await menuPage.clickCoffeCup(COFFEE_NAMES.espresso);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.cappuccino);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.espresso);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
