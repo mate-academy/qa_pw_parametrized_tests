@@ -3,7 +3,6 @@ const { expect } = require('@playwright/test');
 export class MenuPage {
   constructor(page) {
     this.page = page;
-    this.americanoCup = page.getByTestId('Americano');
     this.cartLink = page.getByLabel('Cart page');
     this.totalCheckout = page.getByTestId('checkout');
     this.promoMessage = page.getByText(
@@ -31,10 +30,6 @@ export class MenuPage {
 
   async clickCoffeeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
-  }
-
-  async clickAmericanoCup() {
-    await this.americanoCup.click();
   }
 
   async clickCartLink() {

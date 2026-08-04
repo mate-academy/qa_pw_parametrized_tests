@@ -14,7 +14,7 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   await menuPage.open();
   await menuPage.clickCoffeeCup('Cappuccino');
   await menuPage.clickCoffeeCup('Espresso');
-  await menuPage.clickAmericanoCup();
+  await menuPage.clickCoffeeCup('Americano');
 
   await menuPage.assertPromoMessageIsVisible();
 
@@ -34,5 +34,8 @@ test('Assert discounted Mocha added to the Cart after promo accepting', async ({
     'Cappuccino',
     cappuccinoPrice,
   );
-  await cartPage.assertAmericanoTotalCostContainsCorrectText(americanoPrice);
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    'Americano',
+    americanoPrice,
+  );
 });

@@ -14,11 +14,6 @@ export class CartPage {
       .locator('div')
       .nth(3);
 
-    this.americanoItem = this.cartListLocator
-      .getByRole('listitem')
-      .filter({ hasText: 'Americano' });
-    this.americanoTotalCost = this.americanoItem.locator('div').nth(3);
-
     this.notCoffeeMessage = page.getByText('No coffee, go add some.');
     this.totalCheckout = page.getByTestId('checkout');
   }
@@ -103,14 +98,6 @@ export class CartPage {
 
   async assertDiscountedMochaTotalCostContainsCorrectText(text) {
     await expect(this.discountedMochaTotalCost).toContainText(text);
-  }
-
-  async assertAmericanoItemIsVisible() {
-    await expect(this.americanoItem).toBeVisible();
-  }
-
-  async assertAmericanoTotalCostContainsCorrectText(text) {
-    await expect(this.americanoTotalCost).toContainText(text);
   }
 
   async assertNoCoffeeMessageIsVisible() {
