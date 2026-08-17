@@ -27,24 +27,18 @@ export class MenuPage {
     return this.page.getByTestId(testId);
   }
 
+  coffeeCupCostLocator(coffeeName) {
+    return this.page
+      .getByRole('listitem')
+      .filter({ has: this.coffeeCupLocator(coffeeName) });
+  }
+
   async open() {
     await this.page.goto('/');
   }
 
   async clickCoffeeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
-  }
-
-  async clickCappucinoCup() {
-    await this.cappuccinoCup.click();
-  }
-
-  async clickEspressoCup() {
-    await this.espressoCup.click();
-  }
-
-  async clickAmericanoCup() {
-    await this.americanoCup.click();
   }
 
   async clickCartLink() {
@@ -69,6 +63,10 @@ export class MenuPage {
 
   async assertEspressoCupCostHasValue(value) {
     await expect(this.espressoCupCost).toContainText(value);
+  }
+
+  async assertCoffeeCupCostHasValue(coffeeName, value) {
+    await expect(this.coffeeCupCostLocator(coffeeName)).toContainText(value);
   }
 
   async assertPromoMessageIsVisible() {

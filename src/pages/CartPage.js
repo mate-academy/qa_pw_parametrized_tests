@@ -58,6 +58,10 @@ export class CartPage {
     return this.cartListLocator.getByRole('listitem').filter({ hasText: name });
   }
 
+  removeAllButtonLocator(coffee) {
+    return this.page.getByLabel(`Remove all ${coffee}`);
+  }
+
   coffeeListItemNameCell(name) {
     return this.coffeeListItemLocator(name).locator('div').nth(0);
   }
@@ -82,12 +86,8 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
-  }
-
-  async clickRemoveAllCappucinoButton() {
-    await this.removeAllCappuccinoButton.click();
+  async clickRemoveAllCoffeeButton(coffee) {
+    await this.removeAllButtonLocator(coffee).click();
   }
 
   async clickRemoveOneEspressoButton() {
