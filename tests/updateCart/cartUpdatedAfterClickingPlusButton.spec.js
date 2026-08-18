@@ -21,21 +21,32 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText(oneEspressoPrice);
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.espresso,
+    oneEspressoPrice,
+  );
 
-  await cartPage.clickAddOneEspressoButton();
+  await cartPage.clickAddOneCoffeeButton(COFFEE_NAMES.espresso);
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText(twoEspressoPrice);
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.espresso,
+    twoEspressoPrice,
+  );
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.cappuccino,
     oneCappuccinoPrice,
   );
 
-  await cartPage.clickAddOneCappuccinoButton();
+  await cartPage.clickAddOneCoffeeButton(COFFEE_NAMES.cappuccino);
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.cappuccino,
     twoCappuccinoPrice,
   );
-  await cartPage.assertEspressoTotalCostContainsCorrectText(twoEspressoPrice);
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.espresso,
+    twoEspressoPrice,
+  );
 
   await cartPage.assertTotalCheckoutContainsValue(totalPrice);
 });
