@@ -1,9 +1,9 @@
 import { test } from '../_fixtures/fixtures';
-import { COFFEE_NAMES } from '../../src/constants';
+import { MENU_COFFEE_NAMES } from '../../src/constants';
 
 const testParameters = [];
 
-for (const coffee of Object.values(COFFEE_NAMES)) {
+for (const coffee of Object.values(MENU_COFFEE_NAMES)) {
   testParameters.push({ coffee });
 }
 

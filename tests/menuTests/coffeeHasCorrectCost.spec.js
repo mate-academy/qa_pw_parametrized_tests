@@ -1,10 +1,10 @@
 import { test } from '../_fixtures/fixtures';
 import { priceFormatStr } from '../../src/common/priceFormatters';
-import { COFFEE_NAMES, COFFEE_PRICES } from '../../src/constants';
+import { MENU_COFFEE_NAMES, COFFEE_PRICES } from '../../src/constants';
 
 let testParameters = [];
 
-for (const [key, value] of Object.entries(COFFEE_NAMES)) {
+for (const [key, value] of Object.entries(MENU_COFFEE_NAMES)) {
   testParameters.push({ coffee: value, price: COFFEE_PRICES[key] });
 }
 

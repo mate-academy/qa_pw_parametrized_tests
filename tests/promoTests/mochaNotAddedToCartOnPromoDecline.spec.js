@@ -17,7 +17,7 @@ test('Assert discounted Mocha added to the Cart after promo rejecting', async ({
   await cartPage.waitForLoading();
 
   await cartPage.assertCoffeeItemIsVisible(COFFEE_NAMES.espresso);
-  await cartPage.assertDiscountedMochaItemIsHidden();
+  await cartPage.assertCoffeeItemIsHidden(COFFEE_NAMES.discountedMocha);
 
   await cartPage.assertCoffeeItemIsVisible(COFFEE_NAMES.cappuccino);
   await cartPage.assertCoffeeItemIsVisible(COFFEE_NAMES.americano);
