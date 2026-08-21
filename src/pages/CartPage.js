@@ -82,53 +82,71 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
+  async clickRemoveAllCoffeeButton(coffeeName) {
+    const removeAllCoffeeButton = this.page.getByLabel(
+      `Remove all ${coffeeName}`,
+    );
+
+    await removeAllCoffeeButton.click();
   }
 
-  async clickRemoveAllCappucinoButton() {
-    await this.removeAllCappuccinoButton.click();
-  }
+  async clickRemoveOneCoffeeButton(coffeeName) {
+  await this.page.getByRole('button', { name: `Remove one ${coffeeName}` }).click();
+}
 
-  async clickRemoveOneEspressoButton() {
-    await this.removeOneEspressoButton.click();
-  }
+  // async clickRemoveAllEspressoButton() {
+  //   await this.removeAllEspressoButton.click();
+  // }
 
-  async clickRemoveOneCappuccinoButton() {
-    await this.removeOneCappuccinoButton.click();
-  }
+  // async clickRemoveAllCappucinoButton() {
+  //   await this.removeAllCappuccinoButton.click();
+  // }
 
-  async clickAddOneEspressoButton() {
-    await this.addOneEspressoButton.click();
-  }
+  // async clickRemoveOneEspressoButton() {
+  //   await this.removeOneEspressoButton.click();
+  // }
 
-  async clickAddOneCappuccinoButton() {
-    await this.addOneCappuccinoButton.click();
-  }
+  // async clickRemoveOneCappuccinoButton() {
+  //   await this.removeOneCappuccinoButton.click();
+  // }
 
-  async assertEspressoItemIsVisible() {
-    await expect(this.espressoItem).toBeVisible();
-  }
+  async clickAddOneCoffeeButton(coffeeName) {
+    const addOneCoffeeButton = this.page.getByRole('button', {
+    name: `Add one ${coffeeName}`,
+  });
+  await addOneCoffeeButton.click(); // 👈 missing!
+}
+  // async clickAddOneEspressoButton() {
+  //   await this.addOneEspressoButton.click();
+  // }
 
-  async assertEspressoItemIsHidden() {
-    await expect(this.espressoItem).toBeHidden();
-  }
+  // async clickAddOneCappuccinoButton() {
+  //   await this.addOneCappuccinoButton.click();
+  // }
+
+  // async assertEspressoItemIsVisible() {
+  //   await expect(this.espressoItem).toBeVisible();
+  // }
+
+  // async assertEspressoItemIsHidden() {
+  //   await expect(this.espressoItem).toBeHidden();
+  // }
 
   async assertCoffeeNameContainsCorrectText(name) {
     await expect(this.coffeeListItemNameCell(name)).toContainText(name);
   }
 
-  async assertEspressoNameIsContainsCorrectText() {
-    await expect(this.espressoName).toContainText('Espresso');
-  }
+  // async assertEspressoNameIsContainsCorrectText() {
+  //   await expect(this.espressoName).toContainText('Espresso');
+  // }
 
   async assertCoffeeUnitContainsCorrectText(name, text) {
     await expect(this.coffeeListItemUnitCell(name)).toContainText(text);
   }
 
-  async assertEspressoUnitContainsCorrectText(text) {
-    await expect(this.espressoUnit).toContainText(text);
-  }
+  // async assertEspressoUnitContainsCorrectText(text) {
+  //   await expect(this.espressoUnit).toContainText(text);
+  // }
 
   async assertCoffeeTotalCostContainsCorrectText(name, text) {
     await expect(this.coffeeListItemTotalCostCell(name)).toContainText(text);
@@ -138,40 +156,12 @@ export class CartPage {
     await expect(this.espressoTotalCost).toContainText(text);
   }
 
-  async assertCappuccinoItemIsVisible() {
-    await expect(this.cappuccinoItem).toBeVisible();
+  async assertCoffeeItemIsVisible(name) {
+    await expect(this.coffeeListItemLocator(name)).toBeVisible();
   }
 
-  async assertCappuccinoItemIsHidden() {
-    await expect(this.cappuccinoItem).toBeHidden();
-  }
-
-  async assertCappuccinoNameIsContainsCorrectText() {
-    await expect(this.cappuccinoName).toContainText('Cappuccino');
-  }
-
-  async assertCappuccinoUnitContainsCorrectText(text) {
-    await expect(this.cappuccinoUnit).toContainText(text);
-  }
-
-  async assertCappuccinoTotalCostContainsCorrectText(text) {
-    await expect(this.cappuccinoTotalCost).toContainText(text);
-  }
-
-  async assertDiscountedMochaItemIsHidden() {
-    await expect(this.discountedMochaItem).toBeHidden();
-  }
-
-  async assertDiscountedMochaTotalCostContainsCorrectText(text) {
-    await expect(this.discountedMochaTotalCost).toContainText(text);
-  }
-
-  async assertAmericanoItemIsVisible() {
-    await expect(this.americanoItem).toBeVisible();
-  }
-
-  async assertAmericanoTotalCostContainsCorrectText(text) {
-    await expect(this.americanoTotalCost).toContainText(text);
+  async assertCoffeeItemIsHidden(name) {
+    await expect(this.coffeeListItemLocator(name)).toBeHidden();
   }
 
   async assertNoCoffeeMessageIsVisible() {
@@ -181,4 +171,41 @@ export class CartPage {
   async assertTotalCheckoutContainsValue(value) {
     await expect(this.totalCheckout).toContainText(value);
   }
+  // async assertCappuccinoItemIsVisible() {
+  //   await expect(this.cappuccinoItem).toBeVisible();
+  // }
+
+  // async assertCappuccinoItemIsHidden() {
+  //   await expect(this.cappuccinoItem).toBeHidden();
+  // }
+
+  // async assertCappuccinoNameIsContainsCorrectText() {
+  //   await expect(this.cappuccinoName).toContainText('Cappuccino');
+  // }
+
+  // async assertCappuccinoUnitContainsCorrectText(text) {
+  //   await expect(this.cappuccinoUnit).toContainText(text);
+  // }
+
+  // async assertCappuccinoTotalCostContainsCorrectText(text) {
+  //   await expect(this.cappuccinoTotalCost).toContainText(text);
+  // }
+
+  // async assertDiscountedMochaItemIsHidden() {
+  //   await expect(this.discountedMochaItem).toBeHidden();
+  // }
+
+  // async assertDiscountedMochaTotalCostContainsCorrectText(text) {
+  //   await expect(this.discountedMochaTotalCost).toContainText(text);
+  // }
+
+  // async assertAmericanoItemIsVisible() {
+  //   await expect(this.americanoItem).toBeVisible();
+  // }
+
+  // async assertAmericanoTotalCostContainsCorrectText(text) {
+  //   await expect(this.americanoTotalCost).toContainText(text);
+  // }
+
+
 }

@@ -5,21 +5,32 @@ test('Assert cart updated correctly after clicking minus for drinks', async ({
   menuPage,
 }) => {
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup('Cappuccino');
+  await menuPage.clickCoffeeCup('Espresso');
+  // await menuPage.clickCappucinoCup();
+  // await menuPage.clickEspressoCup();
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
+  await cartPage.assertCoffeeItemIsVisible('Espresso');
 
-  await cartPage.clickRemoveOneEspressoButton();
+  // await cartPage.assertEspressoItemIsVisible();
 
-  await cartPage.assertEspressoItemIsHidden();
-  await cartPage.assertCappuccinoItemIsVisible();
+  await cartPage.clickRemoveOneCoffeeButton('Espresso');
+  // await cartPage.clickRemoveOneEspressoButton();
 
-  await cartPage.clickRemoveOneCappuccinoButton();
+  await cartPage.assertCoffeeItemIsHidden('Espresso');
+  await cartPage.assertCoffeeItemIsVisible('Cappuccino');
 
-  await cartPage.assertCappuccinoItemIsHidden();
+  // await cartPage.assertEspressoItemIsHidden();
+  // await cartPage.assertCappuccinoItemIsVisible();
+
+  await cartPage.clickRemoveOneCoffeeButton('Cappuccino');
+  // await cartPage.clickRemoveOneCappuccinoButton();
+
+  await cartPage.assertCoffeeItemIsHidden('Cappuccino');
+  //await cartPage.assertCappuccinoItemIsHidden();
+  
   await cartPage.assertNoCoffeeMessageIsVisible();
 });

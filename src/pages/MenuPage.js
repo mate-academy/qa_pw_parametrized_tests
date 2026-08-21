@@ -35,17 +35,17 @@ export class MenuPage {
     await this.coffeeCupLocator(coffeeName).click();
   }
 
-  async clickCappucinoCup() {
-    await this.cappuccinoCup.click();
-  }
+  // async clickCappucinoCup() {
+  //   await this.cappuccinoCup.click();
+  // }
 
-  async clickEspressoCup() {
-    await this.espressoCup.click();
-  }
+  // async clickEspressoCup() {
+  //   await this.espressoCup.click();
+  // }
 
-  async clickAmericanoCup() {
-    await this.americanoCup.click();
-  }
+  // async clickAmericanoCup() {
+  //   await this.americanoCup.click();
+  // }
 
   async clickCartLink() {
     await this.cartLink.click();
@@ -63,13 +63,21 @@ export class MenuPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 
-  async assertCappuccinoCupCostHasValue(value) {
-    await expect(this.cappuccinoCupCost).toContainText(value);
+  async assertCoffeeCupCostHasValue(coffeeName, value) {
+    const coffeeCupCost = this.page
+      .getByRole('listitem')
+      .filter({ has: this.coffeeCupLocator(coffeeName) });
+
+    await expect(coffeeCupCost).toContainText(value);
   }
 
-  async assertEspressoCupCostHasValue(value) {
-    await expect(this.espressoCupCost).toContainText(value);
-  }
+  // async assertCappuccinoCupCostHasValue(value) {
+  //   await expect(this.cappuccinoCupCost).toContainText(value);
+  // }
+
+  // async assertEspressoCupCostHasValue(value) {
+  //   await expect(this.espressoCupCost).toContainText(value);
+  // }
 
   async assertPromoMessageIsVisible() {
     await expect(this.promoMessage).toBeVisible();
