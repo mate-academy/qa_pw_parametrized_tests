@@ -1,7 +1,9 @@
 import { test } from '../_fixtures/fixtures';
 import { COFFEE_NAMES } from '../../src/constants';
 
-test('Assert discounted Mocha added to the Cart after promo accepting', async ({
+test(
+  'Assert discounted Mocha is not added to the Cart after promo declining',
+  async ({
   cartPage,
   menuPage,
 }) => {
