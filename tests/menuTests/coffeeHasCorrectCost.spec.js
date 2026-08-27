@@ -2,20 +2,21 @@ import { test } from '../_fixtures/fixtures';
 import { priceFormatStr } from '../../src/common/priceFormatters';
 import { COFFEE_NAMES, COFFEE_PRICES } from '../../src/constants';
 
-let testParameters = [];
+const testParameters = Object.entries(COFFEE_NAMES).map(
+  ([key, coffeeName]) => ({
+    coffeeName,
+    price: COFFEE_PRICES[key],
+  }),
+);
 
-for (const [key, value] of Object.entries(COFFEE_NAMES)) {
-  testParameters.push({ coffee: value, price: COFFEE_PRICES[key] });
-}
-
-testParameters.forEach(({ coffee, price }) => {
-  test(`Check ${coffee} cost is correct on menu page`, async ({
+testParameters.forEach(({ coffeeName, price }) => {
+  test(`Check ${coffeeName} cost is correct on menu page`, async ({
     menuPage,
   }) => {
     const priceStr = priceFormatStr(price);
 
     await menuPage.open();
 
-    await menuPage.assertCoffeeCupCostHasValue(coffee, priceStr);
+    await menuPage.assertCoffeeCupCostHasValue(coffeeName, priceStr);
   });
 });
