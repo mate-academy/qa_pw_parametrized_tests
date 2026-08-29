@@ -82,14 +82,6 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
-  }
-
-  async clickRemoveAllCappucinoButton() {
-    await this.removeAllCappuccinoButton.click();
-  }
-
   async clickRemoveOneEspressoButton() {
     await this.removeOneEspressoButton.click();
   }
