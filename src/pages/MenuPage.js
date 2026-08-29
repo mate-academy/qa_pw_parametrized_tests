@@ -74,4 +74,14 @@ export class MenuPage {
   async assertPromoMessageIsVisible() {
     await expect(this.promoMessage).toBeVisible();
   }
+
+  coffeeCupCostLocator(coffeeName) {
+    const coffeeCup = this.coffeeCupLocator(coffeeName);
+
+    return this.page.getByRole('listitem').filter({ has: coffeeCup });
+  }
+
+  async assertCoffeeCupCostHasValue(coffeeName, value) {
+    await expect(this.coffeeCupCostLocator(coffeeName)).toContainText(value);
+  }
 }

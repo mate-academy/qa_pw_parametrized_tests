@@ -181,4 +181,12 @@ export class CartPage {
   async assertTotalCheckoutContainsValue(value) {
     await expect(this.totalCheckout).toContainText(value);
   }
+
+  removeAllCoffeeButton(coffeeName) {
+    return this.page.getByLabel(`Remove all ${coffeeName}`);
+  }
+
+  async clickRemoveAllCoffeeButton(coffeeName) {
+    await this.removeAllCoffeeButton(coffeeName).click();
+  }
 }
