@@ -1,18 +1,9 @@
 const { expect } = require('@playwright/test');
-import { priceFormatStr } from '../common/priceFormatters';
+
 
 export class MenuPage {
   constructor(page) {
     this.page = page;
-    this.cappuccinoCup = page.getByTestId('Cappuccino');
-    this.cappuccinoCupCost = page
-      .getByRole('listitem')
-      .filter({ has: this.cappuccinoCup });
-    this.espressoCup = page.getByTestId('Espresso');
-    this.espressoCupCost = page
-      .getByRole('listitem')
-      .filter({ has: this.espressoCup });
-    this.americanoCup = page.getByTestId('Americano');
     this.cartLink = page.getByLabel('Cart page');
     this.totalCheckout = page.getByTestId('checkout');
     this.promoMessage = page.getByText(
@@ -24,11 +15,9 @@ export class MenuPage {
     
   }
 
-
   coffeeListItemLocator(name) {
       // 1. Remove the accidental trailing whitespace
   const cleanName = name.trim();
-
   // 2. Escape regex characters and 
   // replace any middle space/underscore with a flexible switcher
   // "Espresso Macchiato" becomes /^Espresso[ _]+Macchiato$/
@@ -36,12 +25,9 @@ export class MenuPage {
   const flexiblePattern = '^' + cleanName.replace(/[ _]+/g, '[ _]+') + '$';
   const testIdRegex = new RegExp(flexiblePattern);
     return this.menuListLocator.getByRole('listitem').filter({
-
      has: this.page.getByTestId(testIdRegex)
-
     })
   }
-
 
   coffeeListItemUnitCell(name) {
     return this.coffeeListItemLocator(name).locator('h4 small');
@@ -50,8 +36,6 @@ export class MenuPage {
   async assertCoffeeUnitContainsCorrectText(name, text) {
     await expect(this.coffeeListItemUnitCell(name)).toContainText(text);
   }
-
-
 
   coffeeCupLocator(coffeeName) {
     const testId = coffeeName.replace(' ', '_');
@@ -65,18 +49,6 @@ export class MenuPage {
 
   async clickCoffeeCup(coffeeName) {
     await this.coffeeCupLocator(coffeeName).click();
-  }
-
-  async clickCappucinoCup() {
-    await this.cappuccinoCup.click();
-  }
-
-  async clickEspressoCup() {
-    await this.espressoCup.click();
-  }
-
-  async clickAmericanoCup() {
-    await this.americanoCup.click();
   }
 
   async clickCartLink() {
@@ -93,14 +65,6 @@ export class MenuPage {
 
   async assertTotalCheckoutContainsValue(value) {
     await expect(this.totalCheckout).toContainText(value);
-  }
-
-  async assertCappuccinoCupCostHasValue(value) {
-    await expect(this.cappuccinoCupCost).toContainText(value);
-  }
-
-  async assertEspressoCupCostHasValue(value) {
-    await expect(this.espressoCupCost).toContainText(value);
   }
 
   async assertPromoMessageIsVisible() {
