@@ -54,6 +54,10 @@ export class CartPage {
     this.totalCheckout = page.getByTestId('checkout');
   }
 
+  removeAllButtons(name) {
+    return this.page.getByLabel(`Remove all ${name}`);
+  }
+
   coffeeListItemLocator(name) {
     return this.cartListLocator.getByRole('listitem').filter({ hasText: name });
   }
@@ -82,8 +86,8 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
+  async clickRemoveAllButton(name) {
+    await this.removeAllButtons(name).click();
   }
 
   async clickRemoveAllCappucinoButton() {
