@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-class-members */
 const { expect } = require('@playwright/test');
 
 export class MenuPage {
@@ -18,10 +19,10 @@ export class MenuPage {
     return this.page.getByTestId(testId);
   }
 
-  coffeeCupCostLocator(coffeeName) {
-    return this.page
-      .getByRole('listitem')
-      .filter({ has: this.coffeeCupLocator(coffeeName) });
+  coffeeCupLocator(coffeeName) {
+    const testId = coffeeName.replace(' ', '_');
+
+    return this.page.getByTestId(testId);
   }
 
   async open() {
