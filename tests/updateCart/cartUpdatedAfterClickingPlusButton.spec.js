@@ -1,6 +1,6 @@
 import { test } from '../_fixtures/fixtures';
 import { priceFormatStr } from '../../src/common/priceFormatters';
-import { COFFEE_PRICES } from '../../src/constants';
+import { COFFEE_NAMES, COFFEE_PRICES } from '../../src/constants';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
   cartPage,
@@ -15,27 +15,38 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   const totalPrice = priceFormatStr(totalPriceNum);
 
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.cappuccino);
+  await menuPage.clickCoffeeCup(COFFEE_NAMES.espresso);
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText(oneEspressoPrice);
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.espresso,
+    oneEspressoPrice,
+  );
 
-  await cartPage.clickAddOneEspressoButton();
+  await cartPage.clickAddOneButton(COFFEE_NAMES.espresso);
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText(twoEspressoPrice);
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.espresso,
+    twoEspressoPrice,
+  );
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.cappuccino,
     oneCappuccinoPrice,
   );
 
-  await cartPage.clickAddOneCappuccinoButton();
+  await cartPage.clickAddOneButton(COFFEE_NAMES.cappuccino);
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.cappuccino,
     twoCappuccinoPrice,
   );
-  await cartPage.assertEspressoTotalCostContainsCorrectText(twoEspressoPrice);
+  await cartPage.assertCoffeeTotalCostContainsCorrectText(
+    COFFEE_NAMES.espresso,
+    twoEspressoPrice,
+  );
 
   await cartPage.assertTotalCheckoutContainsValue(totalPrice);
 });
