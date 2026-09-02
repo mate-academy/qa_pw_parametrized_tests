@@ -5,21 +5,21 @@ test('Assert cart updated correctly after clicking minus for drinks', async ({
   menuPage,
 }) => {
   await menuPage.open();
-  await menuPage.clickCappucinoCup();
-  await menuPage.clickEspressoCup();
+  await menuPage.clickCoffeeCup('Cappuccino');
+  await menuPage.clickCoffeeCup('Espresso');
 
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
+  await cartPage.assertItemIsVisible('Espresso');
 
-  await cartPage.clickRemoveOneEspressoButton();
+  await cartPage.clickRemoveOneCoffeeButton('Espresso');
 
-  await cartPage.assertEspressoItemIsHidden();
-  await cartPage.assertCappuccinoItemIsVisible();
+  await cartPage.assertItemIsHidden('Espresso');
+  await cartPage.assertItemIsVisible('Cappuccino');
 
-  await cartPage.clickRemoveOneCappuccinoButton();
+  await cartPage.clickRemoveOneCoffeeButton('Cappuccino');
 
-  await cartPage.assertCappuccinoItemIsHidden();
+  await cartPage.assertItemIsHidden('Cappuccino');
   await cartPage.assertNoCoffeeMessageIsVisible();
 });
