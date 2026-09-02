@@ -27,6 +27,12 @@ export class MenuPage {
     return this.page.getByTestId(testId);
   }
 
+  coffeeCupCostLocator(coffeeName) {
+    return this.page
+      .getByRole('listitem')
+      .filter({ has: this.coffeeCupLocator(coffeeName) });
+  }
+
   async open() {
     await this.page.goto('/');
   }
@@ -63,8 +69,8 @@ export class MenuPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 
-  async assertCappuccinoCupCostHasValue(value) {
-    await expect(this.cappuccinoCupCost).toContainText(value);
+  async assertCoffeCostHasValue(coffeeName, value) {
+    await expect(this.coffeeCupCostLocator(coffeeName)).toContainText(value);
   }
 
   async assertEspressoCupCostHasValue(value) {

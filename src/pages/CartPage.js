@@ -70,6 +70,10 @@ export class CartPage {
     return this.coffeeListItemLocator(name).locator('div').nth(3);
   }
 
+  removeAllCoffeeButton(name) {
+    return this.page.getByLabel(`Remove all ${name}`);
+  }
+
   async open() {
     await this.page.goto('/cart');
   }
@@ -88,6 +92,10 @@ export class CartPage {
 
   async clickRemoveAllCappucinoButton() {
     await this.removeAllCappuccinoButton.click();
+  }
+
+  async clickRemoveAllCoffeeButton(name) {
+    await this.removeAllCoffeeButton(name).click();
   }
 
   async clickRemoveOneEspressoButton() {
