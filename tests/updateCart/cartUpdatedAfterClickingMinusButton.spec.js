@@ -13,12 +13,12 @@ test('Assert cart updated correctly after clicking minus for drinks', async ({
 
   await cartPage.assertEspressoItemIsVisible();
 
-  await cartPage.clickRemoveOneEspressoButton();
+  await cartPage.clickRemoveOneCoffeeButton('Espresso');
 
   await cartPage.assertEspressoItemIsHidden();
   await cartPage.assertCappuccinoItemIsVisible();
 
-  await cartPage.clickRemoveOneCappuccinoButton();
+  await cartPage.clickRemoveOneCoffeeButton('Cappuccino');
 
   await cartPage.assertCappuccinoItemIsHidden();
   await cartPage.assertNoCoffeeMessageIsVisible();
