@@ -74,4 +74,6 @@ export class MenuPage {
   async assertPromoMessageIsVisible() {
     await expect(this.promoMessage).toBeVisible();
   }
+
+  async assertCoffeeCupCostHasValue() {}
 }
