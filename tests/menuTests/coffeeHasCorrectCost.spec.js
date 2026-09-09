@@ -2,12 +2,12 @@ import { test } from '../_fixtures/fixtures';
 import { priceFormatStr } from '../../src/common/priceFormatters';
 import { COFFEE_PRICES, COFFEE_NAMES } from '../../src/constants';
 
-const coffeTestData = Object.keys(COFFEE_NAMES).map((key) => ({
+const coffeeTestData = Object.keys(COFFEE_NAMES).map((key) => ({
   coffeeName: COFFEE_NAMES[key],
   coffeePrice: COFFEE_PRICES[key],
 }));
 
-coffeTestData.forEach(({coffeeName, coffeePrice}) => {
+coffeeTestData.forEach(({coffeeName, coffeePrice}) => {
   test(`Check '${coffeeName}' cup has correct cost`, async ({ menuPage }) => {
     const price = priceFormatStr(coffeePrice);
 

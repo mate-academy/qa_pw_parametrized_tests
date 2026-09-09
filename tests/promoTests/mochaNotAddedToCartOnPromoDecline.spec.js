@@ -16,9 +16,9 @@ test('Assert discounted Mocha not added to the Cart after promo accepting', asyn
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoItemIsVisible();
-  await cartPage.assertDiscountedMochaItemIsHidden();
+  await cartPage.assertCoffeeItemIsVisible(COFFEE_NAMES.espresso);
+  await cartPage.assertCoffeeItemIsHidden('(Discounted) Mocha');
 
-  await cartPage.assertCappuccinoItemIsVisible();
-  await cartPage.assertAmericanoItemIsVisible();
+  await cartPage.assertCoffeeItemIsVisible(COFFEE_NAMES.cappuccino);
+  await cartPage.assertCoffeeItemIsVisible(COFFEE_NAMES.americano);
 });
