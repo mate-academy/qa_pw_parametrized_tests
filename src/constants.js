@@ -22,3 +22,5 @@ export const COFFEE_PRICES = {
   espressoConPanna: 14,
   cafeBreve: 15,
 };
+
+export const NO_COFFEE_MESSAGE = 'No coffee, go add some.';

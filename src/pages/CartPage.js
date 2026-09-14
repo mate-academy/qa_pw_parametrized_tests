@@ -33,8 +33,8 @@ export class CartPage {
       .filter({ hasText: 'Americano' });
     this.americanoTotalCost = this.americanoItem.locator('div').nth(3);
 
-    this.removeAllEspressoButton = page.getByLabel('Remove all Espresso');
-    this.removeAllCappuccinoButton = page.getByLabel('Remove all Cappuccino');
+    // this.removeAllEspressoButton = page.getByLabel('Remove all Espresso');
+    // this.removeAllCappuccinoButton = page.getByLabel('Remove all Cappuccino');
 
     this.removeOneEspressoButton = page.getByRole('button', {
       name: 'Remove one Espresso',
@@ -52,6 +52,10 @@ export class CartPage {
 
     this.notCoffeeMessage = page.getByText('No coffee, go add some.');
     this.totalCheckout = page.getByTestId('checkout');
+  }
+
+  removeAllCoffeeButton(coffeeName) {
+    return this.page.getByLabel(`Remove all ${coffeeName}`);
   }
 
   coffeeListItemLocator(name) {
@@ -82,13 +86,17 @@ export class CartPage {
     await this.page.reload();
   }
 
-  async clickRemoveAllEspressoButton() {
-    await this.removeAllEspressoButton.click();
+  async clickRemoveAllCoffeeButton(coffeeName) {
+    await this.removeAllCoffeeButton(coffeeName).click();
   }
 
-  async clickRemoveAllCappucinoButton() {
-    await this.removeAllCappuccinoButton.click();
-  }
+  // async clickRemoveAllEspressoButton() {
+  //   await this.removeAllEspressoButton.click();
+  // }
+
+  // async clickRemoveAllCappucinoButton() {
+  //   await this.removeAllCappuccinoButton.click();
+  // }
 
   async clickRemoveOneEspressoButton() {
     await this.removeOneEspressoButton.click();
@@ -182,3 +190,5 @@ export class CartPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 }
+// Fix round 2 after suggestions from code review:
+// Some methods should not be removed, because they are still used in some other tests (espressoItem, cappuccinoItem, discountedMochaItem, americanoItem, removeOneEspressoButton)
