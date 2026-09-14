@@ -190,3 +190,7 @@ export class CartPage {
     await expect(this.totalCheckout).toContainText(value);
   }
 }
+// Fix round 1 after suggestions from code review:
+// This method should not be removed/commented, it's not redundant:
+// async clickRemoveOneEspressoButton() {
+//     await this.removeOneEspressoButton.click();
